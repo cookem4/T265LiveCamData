@@ -46,7 +46,7 @@ int main(){
 	uint64_t start = std::chrono::duration_cast<std::chrono::microseconds>(m_clock.now().time_since_epoch()).count();
 	uint64_t lastFrame = std::chrono::duration_cast<std::chrono::microseconds>(m_clock.now().time_since_epoch()).count();
 	try{
-		while(numFrames < 10000){			
+		while(numFrames < true){			
 			ofstream myfile;
 			
 			auto frames = pipe.wait_for_frames();

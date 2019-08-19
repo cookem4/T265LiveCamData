@@ -53,13 +53,13 @@ int main(){
 
 			auto f = frames.first_or_default(RS2_STREAM_POSE);
 			auto pose_data = f.as<rs2::pose_frame>().get_pose_data();
-			//Print position
-			//std::cout << "\r" << "Device Position: " << std::setprecision(3) << std::fixed << pose_data.translation.x << " " << pose_data.translation.y << " " << pose_data.translation.z << " (meters)";
-			//std::cout << "\r" << "Device Confidence Level (0-3): " << std::setprecision(1) << pose_data.tracker_confidence;
+			
 			uint64_t now = std::chrono::duration_cast<std::chrono::microseconds>(m_clock.now().time_since_epoch()).count();
 			long secSinceStart = (now-start);
-			//float frameRate = 1000000.0f/((float)(now-lastFrame));
-			//printf("Frame: %d | Time: %d | Quarternion Rotation: %f, %f, %f, %f | Device Position: %fm, %fm, %fm  |   Confidence Level (0-3): %d\n", numFrames, secSinceStart, pose_data.rotation.x, pose_data.rotation.y, pose_data.rotation.z, pose_data.rotation.w, pose_data.translation.x, pose_data.translation.y, pose_data.translation.z, pose_data.tracker_confidence);			
+			
+			//Printing Data to screen for help with calibration
+			std::cout << "\r" << std::setprecision(3) << pose_data.translation.x << " " << pose_data.translation.y << " " << pose_data.translation.z << " "<< pose_data.tracker_confidence << " "<< numFrames;
+
 
 			myfile.open("coordinateData.csv");
 			myfile << numFrames<< "," << secSinceStart << "," << pose_data.rotation.x << "," << pose_data.rotation.y << "," << pose_data.rotation.z << "," << pose_data.rotation.w << "," << pose_data.translation.x << "," << pose_data.translation.y << "," << pose_data.translation.z << "," << pose_data.tracker_confidence << endl;
